@@ -1,0 +1,1 @@
+/opt/rh/devtoolset-8/root/usr/bin/c++    -O0 -g2 -ggdb   CMakeFiles/test_test.dir/tests/test.cc.o  -o ../bin/test_test  -L/home/mz/workspace/CPP/myredis_cpp/lib  -L/usr/lib64/mysql -lpthread -lalpha /usr/lib64/libz.so -lyaml-cpp -ldl -lmysqlclient /usr/lib64/libssl.so /usr/lib64/libcrypto.so -Wl,-rpath,/home/mz/workspace/CPP/myredis_cpp/lib:/usr/lib64/mysql 
