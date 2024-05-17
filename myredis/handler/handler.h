@@ -7,7 +7,7 @@
 #include "../../lib/alpha/alpha.h"
 #include "../../lib/alpha/socket.h"
 #include "../protocol/parser.h"
-#include "../server.h"
+#include "../server/server.h"
 #include "struct.h"
 #include "persister.h"
 
@@ -28,11 +28,11 @@ public:
 
     void run() override;
 
-    void handle(Socket::ptr sock) override;
+    void handle(Chan<std::string>::ptr cancel, Socket::ptr sock) override;
 
     void close() override;
 private:
-    void handler(Socket::ptr sock);
+    void handler(Chan<std::string>::ptr cancel, Socket::ptr sock);
     void handleDroplet();
 private:
     FiberMutex m_mutex;

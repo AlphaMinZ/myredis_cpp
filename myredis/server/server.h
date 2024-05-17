@@ -5,6 +5,7 @@
 #include "../lib/alpha/channel.h"
 #include "../lib/alpha/alpha.h"
 #include "../../lib/alpha/socket.h"
+#include "../../lib/alpha/address.h"
 
 namespace alphaMin {
 
@@ -14,12 +15,12 @@ public:
 
     virtual void run() = 0;
 
-    virtual void handle(Socket::ptr sock) = 0;
+    virtual void handle(Chan<std::string>::ptr cancel, Socket::ptr sock) = 0;
 
     virtual void close() = 0;
 };
 
-class Server {
+class Server : std::enable_shared_from_this<Server> {
 public:
     typedef std::shared_ptr<Server> ptr;
 
@@ -32,11 +33,16 @@ public:
 
     ~Server();
 
-    void run();
+    void run(Address::ptr address);
 
     void stop();
+
+    Logger::ptr& getLogger() { return m_logger;}
+
+    Handler::ptr& getHandler() { return m_handler;}
+
 private:
-    void listenAndServe(Socket::ptr listener, Chan<std::string> closec);
+    void listenAndServe(Socket::ptr listener, Chan<std::string>::ptr closec);
 private:
     Logger::ptr m_logger; // 日志器
     Chan<std::string>::ptr m_stopc; // 通知关闭管道

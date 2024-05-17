@@ -6,7 +6,7 @@ project(myredis)
 
 set(CMAKE_CXX_STANDARD 11)
 
-include_directories(./myredis)
+include_directories(./myredis/*)
 
 file(GLOB SRC ${CMAKE_CURRENT_SOURCE_DIR}/myredis/*.cc)
 
