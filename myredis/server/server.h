@@ -21,7 +21,7 @@ public:
     virtual void close() = 0;
 };
 
-class Server : std::enable_shared_from_this<Server> {
+class Server : public std::enable_shared_from_this<Server> {
 public:
     typedef std::shared_ptr<Server> ptr;
 

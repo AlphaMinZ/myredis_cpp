@@ -5,7 +5,7 @@
 #include <memory>
 #include <vector>
 #include "../../lib/alpha/channel.h"
-#include "../../lib/alpha/stream.h"
+#include "../../lib/alpha/socket_stream.h"
 
 namespace alphaMin {
 
@@ -51,7 +51,7 @@ public:
     typedef std::shared_ptr<Parser> ptr;
 
     virtual ~Parser();
-    virtual Chan<Droplet::ptr>::ptr parseStream(Stream::ptr reader) = 0;
+    virtual Chan<Droplet::ptr>::ptr parseStream(SocketStream::ptr sockStream) = 0;
 };
 
 }
