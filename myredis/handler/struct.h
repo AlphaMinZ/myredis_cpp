@@ -24,7 +24,7 @@ public:
     typedef std::shared_ptr<MultiReply> ptr;
 
     virtual ~MultiReply();
-    virtual std::vector<std::string> args() = 0;
+    virtual std::vector<std::string> getArgs() = 0;
 };
 
 struct Droplet {
@@ -33,6 +33,7 @@ struct Droplet {
     bool terminated();
 
     Reply::ptr reply;
+    bool haveErr = false;
 };
 
 class DB {
@@ -41,7 +42,7 @@ public:
 
     virtual ~DB();
 
-    virtual Reply::ptr Do(std::vector<std::string> cmdLine) = 0;
+    virtual Reply::ptr Do(Chan<std::string>::ptr cancel, std::vector<std::string> cmdLine) = 0;
     virtual void close () = 0;
 };
 

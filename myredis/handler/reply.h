@@ -4,14 +4,15 @@
 #include <memory>
 #include <string>
 #include <vector>
+#include "struct.h"
 
 namespace alphaMin {
 
 #define CRLF "\r\n"
 
-struct OKReply {
+struct OKReply : public Reply {
     typedef std::shared_ptr<OKReply> ptr;
-    std::string toString() {
+    std::string toString() override {
         return okStrings;
     }
 };
@@ -23,34 +24,34 @@ std::string okStrings = "+OK\r\n";
 auto theOKReply = std::make_shared<OKReply>();
 
 // 简单字符串类型. 协议为 【+】【string】【CRLF】
-struct SimpleStringReply {
+struct SimpleStringReply : public Reply {
     typedef std::shared_ptr<SimpleStringReply> ptr;
 
     SimpleStringReply(std::string str)
         :str_(str) {}
 
-    std::string toString();
+    std::string toString() override;
 
     std::string str_;
 };
 
 // 简单数字类型. 协议为 【:】【int】【CRLF】
-struct IntReply {
+struct IntReply : public Reply {
     typedef std::shared_ptr<IntReply> ptr;
 
     IntReply(int64_t code)
         :code_(code) {}
 
-    std::string toString();
+    std::string toString() override;
 
     int64_t code_;
 };
 
 // 参数语法错误
-struct SyntaxErrReply {
+struct SyntaxErrReply : public Reply {
     typedef std::shared_ptr<SyntaxErrReply> ptr;
 
-    std::string toString();
+    std::string toString() override;
     std::string error();
 };
 
@@ -62,10 +63,10 @@ SyntaxErrReply::ptr newSyntaxErrReply() {
 }
 
 // 数据类型错误
-struct WrongTypeErrReply {
+struct WrongTypeErrReply : public Reply {
     typedef std::shared_ptr<WrongTypeErrReply> ptr;
 
-    std::string toString();
+    std::string toString() override;
     std::string error();
 };
 
@@ -77,21 +78,21 @@ WrongTypeErrReply::ptr newWrongTypeErrReply() {
 }
 
 // 错误类型. 协议为 【-】【err】【CRLF】
-struct ErrReply {
+struct ErrReply : public Reply {
     typedef std::shared_ptr<ErrReply> ptr;
 
     ErrReply(std::string errStr)
         :errStr_(errStr) {}
 
-    std::string toString();
+    std::string toString() override;
 
     std::string errStr_;
 };
 
-struct NillReply {
+struct NillReply : public Reply {
     typedef std::shared_ptr<NillReply> ptr;
 
-    std::string toString() { return nillBulkBytes;}
+    std::string toString() override { return nillBulkBytes;}
 };
 
 auto nillReply = std::make_shared<NillReply>();
@@ -102,39 +103,39 @@ NillReply::ptr newNillReply() {
 }
 
 // 定长字符串类型，协议固定为 【$】【length】【CRLF】【content】【CRLF】
-struct BulkReply {
+struct BulkReply : public Reply {
     std::shared_ptr<BulkReply> ptr;
 
     BulkReply(std::string arg)
         :arg_(arg) {}
 
-    std::string toString();
+    std::string toString() override;
 
     std::string arg_;
 };
 
 // 数组类型. 协议固定为 【*】【arr.length】【CRLF】+ arr.length * (【$】【length】【CRLF】【content】【CRLF】)
-class MultiBulkReply {
+class MultiBulkReply : public MultiReply, Reply {
 public:
     typedef std::shared_ptr<MultiBulkReply> ptr;
 
     MultiBulkReply(std::vector<std::string> args)
         :m_args(args) {}
 
-    std::vector<std::string> getArgs() { return m_args;}
+    std::vector<std::string> getArgs() override { return m_args;}
 
-    std::string toString();
+    std::string toString() override;
 private:
     std::vector<std::string> m_args;
 };
 
 // 空数组类型. 采用单例，协议固定为【*】【0】【CRLF】
-struct EmptyMultiBulkReply {
+struct EmptyMultiBulkReply : public Reply {
     typedef std::shared_ptr<EmptyMultiBulkReply> ptr;
 
     EmptyMultiBulkReply() {}
 
-    std::string toString() { return emptyMultiBulkBytes;}
+    std::string toString() override { return emptyMultiBulkBytes;}
 };
 
 std::string emptyMultiBulkBytes = "*0\r\n";

@@ -5,6 +5,7 @@
 #include "../lib/alpha/channel.h"
 #include "../lib/alpha/alpha.h"
 #include "../../lib/alpha/socket.h"
+#include "../../lib/alpha/socket_stream.h"
 #include "../../lib/alpha/address.h"
 
 namespace alphaMin {
@@ -15,7 +16,7 @@ public:
 
     virtual void run() = 0;
 
-    virtual void handle(Chan<std::string>::ptr cancel, Socket::ptr sock) = 0;
+    virtual void handle(Chan<std::string>::ptr cancel, SocketStream::ptr sock) = 0;
 
     virtual void close() = 0;
 };
@@ -40,6 +41,8 @@ public:
     Logger::ptr& getLogger() { return m_logger;}
 
     Handler::ptr& getHandler() { return m_handler;}
+
+    Chan<std::string>::ptr& getStopc() { return m_stopc;}
 
 private:
     void listenAndServe(Socket::ptr listener, Chan<std::string>::ptr closec);
