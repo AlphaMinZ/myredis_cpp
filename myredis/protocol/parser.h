@@ -40,8 +40,8 @@ public:
     // 解析
     Droplet::ptr parseMultiBulk_pb(std::string header, SocketStream::ptr sockStream) { return parseMultiBulk(header, sockStream);}
 
-    std::unordered_map<std::string, lineParser>& getLineParsers() { return m_lineParsers;}
-    void setLineParser(std::string header, lineParser fc) { m_lineParsers[header] = fc;}
+    std::unordered_map<char, lineParser>& getLineParsers() { return m_lineParsers;}
+    void setLineParser(char header, lineParser fc) { m_lineParsers[header] = fc;}
 
 private:
     void parse(SocketStream::ptr sockStream, Chan<Droplet::ptr>::ptr ch);
@@ -59,18 +59,18 @@ private:
     // 解析
     Droplet::ptr parseMultiBulk(std::string header, SocketStream::ptr sockStream);
 private:
-    std::unordered_map<std::string, lineParser> m_lineParsers;
+    std::unordered_map<char, lineParser> m_lineParsers;
     Logger::ptr m_logger;
 };
 
 Parse::ptr newParser(Logger::ptr logger) {
     auto p = std::make_shared<Parse>(logger);
     
-    p->setLineParser("+", std::bind(&Parse::parseSimpleString_pb, p, std::placeholders::_1, std::placeholders::_2));
-    p->setLineParser("-", std::bind(&Parse::parseError_pb, p, std::placeholders::_1, std::placeholders::_2));
-    p->setLineParser(":", std::bind(&Parse::parseInt_pb, p, std::placeholders::_1, std::placeholders::_2));
-    p->setLineParser("$", std::bind(&Parse::parseBulk_pb, p, std::placeholders::_1, std::placeholders::_2));
-    p->setLineParser("*", std::bind(&Parse::parseMultiBulk_pb, p, std::placeholders::_1, std::placeholders::_2));
+    p->setLineParser('+', std::bind(&Parse::parseSimpleString_pb, p, std::placeholders::_1, std::placeholders::_2));
+    p->setLineParser('-', std::bind(&Parse::parseError_pb, p, std::placeholders::_1, std::placeholders::_2));
+    p->setLineParser(':', std::bind(&Parse::parseInt_pb, p, std::placeholders::_1, std::placeholders::_2));
+    p->setLineParser('$', std::bind(&Parse::parseBulk_pb, p, std::placeholders::_1, std::placeholders::_2));
+    p->setLineParser('*', std::bind(&Parse::parseMultiBulk_pb, p, std::placeholders::_1, std::placeholders::_2));
 
     return p;
 }

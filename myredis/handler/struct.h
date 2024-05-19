@@ -30,10 +30,14 @@ public:
 struct Droplet {
     typedef std::shared_ptr<Droplet> ptr;
 
+    Droplet(Reply::ptr reply = std::make_shared<Reply>(), bool haveErr = false)
+        :reply_(reply)
+        ,haveErr_(haveErr) {}
+
     bool terminated();
 
-    Reply::ptr reply;
-    bool haveErr = false;
+    Reply::ptr reply_;
+    bool haveErr_ = false;
 };
 
 class DB {
