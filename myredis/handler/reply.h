@@ -52,7 +52,7 @@ struct SyntaxErrReply : public Reply {
     typedef std::shared_ptr<SyntaxErrReply> ptr;
 
     std::string toString() override;
-    std::string error();
+    std::string error() { return "Err syntax error";}
 };
 
 std::string syntaxErrBytes = "-Err syntax error\r\n";
@@ -67,7 +67,7 @@ struct WrongTypeErrReply : public Reply {
     typedef std::shared_ptr<WrongTypeErrReply> ptr;
 
     std::string toString() override;
-    std::string error();
+    std::string error() { return "WRONGTYPE Operation against a key holding the wrong kind of value";}
 };
 
 std::string wrongTypeErrBytes = "-WRONGTYPE Operation against a key holding the wrong kind of value\r\n";

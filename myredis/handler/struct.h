@@ -15,7 +15,7 @@ class Reply {
 public:
     typedef std::shared_ptr<Reply> ptr;
 
-    virtual ~Reply();
+    virtual ~Reply() {};
     virtual std::string toString() = 0;
 };
 
@@ -23,7 +23,7 @@ class MultiReply {
 public:
     typedef std::shared_ptr<MultiReply> ptr;
 
-    virtual ~MultiReply();
+    virtual ~MultiReply() {};
     virtual std::vector<std::string> getArgs() = 0;
 };
 
@@ -34,7 +34,9 @@ struct Droplet {
         :reply_(reply)
         ,haveErr_(haveErr) {}
 
-    bool terminated();
+    bool terminated() {
+        return haveErr_;
+    }
 
     Reply::ptr reply_;
     bool haveErr_ = false;
@@ -44,7 +46,7 @@ class DB {
 public:
     typedef std::shared_ptr<DB> ptr;
 
-    virtual ~DB();
+    virtual ~DB() {};
 
     virtual Reply::ptr Do(Chan<std::string>::ptr cancel, std::vector<std::string> cmdLine) = 0;
     virtual void close () = 0;
@@ -54,7 +56,7 @@ class Parser {
 public:
     typedef std::shared_ptr<Parser> ptr;
 
-    virtual ~Parser();
+    virtual ~Parser() {};
     virtual Chan<Droplet::ptr>::ptr parseStream(SocketStream::ptr sockStream) = 0;
 };
 

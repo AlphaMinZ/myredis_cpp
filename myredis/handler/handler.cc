@@ -55,21 +55,21 @@ void Handle::handleDroplet(Chan<std::string>::ptr cancel, SocketStream::ptr sock
         return;
     }
 
-    if(droplet->haveErr) {
-        sockStream->write(droplet->reply->toString().c_str(), droplet->reply->toString().size());
+    if(droplet->haveErr_) {
+        sockStream->write(droplet->reply_->toString().c_str(), droplet->reply_->toString().size());
         ALPHA_LOG_ERROR(m_logger) << "conn request err";
         return;
     }
 
-    if(droplet->reply.get() == nullptr) {
+    if(droplet->reply_.get() == nullptr) {
         ALPHA_LOG_ERROR(m_logger) << "conn empty request";
         return;
     }
 
     // need test
-    MultiReply* multiReply = dynamic_cast<MultiReply*>(droplet->reply.get());
+    MultiReply* multiReply = dynamic_cast<MultiReply*>(droplet->reply_.get());
     if(!multiReply) {
-        ALPHA_LOG_ERROR(m_logger) << "conn invalid request: " << droplet->reply->toString();
+        ALPHA_LOG_ERROR(m_logger) << "conn invalid request: " << droplet->reply_->toString();
         return;
     }
 

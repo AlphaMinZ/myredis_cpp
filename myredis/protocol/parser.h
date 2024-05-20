@@ -42,6 +42,7 @@ public:
 
     std::unordered_map<char, lineParser>& getLineParsers() { return m_lineParsers;}
     void setLineParser(char header, lineParser fc) { m_lineParsers[header] = fc;}
+    // void setLineParser(char header, lineParser fc) { m_lineParsers.insert({header, fc});}
 
 private:
     void parse(SocketStream::ptr sockStream, Chan<Droplet::ptr>::ptr ch);

@@ -49,6 +49,8 @@ class Command {
 public:
     typedef std::shared_ptr<Command> ptr;
 
+    Command() {}
+
     Command(CmdType cmd, std::vector<std::string> args)
         :m_cmd(cmd)
         ,m_args(args) {}
@@ -59,7 +61,7 @@ public:
 
     std::vector<std::string> getArgs() { return m_args;}
 
-    std::vector<std::string> getCmd();
+    std::string getCmd() { return m_cmd;}
 
 private:
     CmdType m_cmd;

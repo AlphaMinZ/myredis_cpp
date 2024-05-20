@@ -9,7 +9,7 @@
 
 namespace alphaMin {
 
-class DBExecutor : public Executor {
+class DBExecutor : public Executor , std::enable_shared_from_this<DBExecutor> {
 public:
     typedef std::shared_ptr<DBExecutor> ptr;
 
@@ -24,7 +24,9 @@ public:
     void run();
 private:
     Chan<Command::ptr>::ptr m_ch;
-    std::unordered_map<CmdType, CmdHandler> m_cmdHandlers;
+    Chan<void*>::ptr m_cancel;
+    std::unordered_map<CmdType, std::shared_ptr<CmdHandler> > m_cmdHandlers;
+    std::unordered_map<CmdType, CmdHandler> m_cmdHandlers_2;
     DataStore::ptr m_dataStore;
     Timer::ptr m_gcTimer;
 };
