@@ -109,7 +109,7 @@ void DBExecutor::run() {
             }
 
             m_dataStore->expirePreprocess((*(result_cmd->result))->getArgs()[0]);
-            auto& handlerFunc = m_cmdHandlers_2[cmd];
+            auto& handlerFunc = it->second;
             (*(result_cmd->result))->getReceiver()->send(handlerFunc(*(result_cmd->result)));
         }
     }

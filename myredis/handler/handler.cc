@@ -9,7 +9,7 @@ void Handle::run() {
 
 }
 
-void Handle::handle(Chan<std::string>::ptr cancel, SocketStream::ptr sockStream) {
+void Handle::handle(Chan<void*>::ptr cancel, SocketStream::ptr sockStream) {
     m_mutex.lock();
 
     if(m_closed.load()) {
@@ -23,18 +23,18 @@ void Handle::handle(Chan<std::string>::ptr cancel, SocketStream::ptr sockStream)
     handler(cancel, sockStream);
 }
 
-void Handle::handler(Chan<std::string>::ptr cancel, SocketStream::ptr sockStream) {
+void Handle::handler(Chan<void*>::ptr cancel, SocketStream::ptr sockStream) {
     auto stream = m_parser->parseStream(std::make_shared<SocketStream>(sockStream));
 
     auto cond = std::make_shared<FiberCondition>();
     auto mutex = std::make_shared<FiberMutex>();
     mutex->lock();
 
-    auto result_cancelc = std::make_shared<result_chan<std::string> >();
+    auto result_cancelc = std::make_shared<result_chan<void*> >();
     auto result_dropletc = std::make_shared<result_chan<alphaMin::Droplet::ptr> >();
 
     for(;;) {
-        alphaMin::select<std::string>(cancel, cond, mutex, result_cancelc, nullptr);
+        alphaMin::select<void*>(cancel, cond, mutex, result_cancelc, nullptr);
         alphaMin::select<alphaMin::Droplet::ptr>(stream, cond, mutex, result_dropletc, nullptr);
         cond->wait(*mutex);
         
@@ -50,7 +50,7 @@ void Handle::handler(Chan<std::string>::ptr cancel, SocketStream::ptr sockStream
 }
 
 // TODO 加一个错误类型，这个函数需要传递一个错误类型出来
-void Handle::handleDroplet(Chan<std::string>::ptr cancel, SocketStream::ptr sockStream, Droplet::ptr droplet) {
+void Handle::handleDroplet(Chan<void*>::ptr cancel, SocketStream::ptr sockStream, Droplet::ptr droplet) {
     if(droplet->terminated()) {
         return;
     }

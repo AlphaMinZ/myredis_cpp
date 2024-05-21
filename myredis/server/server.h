@@ -16,7 +16,7 @@ public:
 
     virtual void run() = 0;
 
-    virtual void handle(Chan<std::string>::ptr cancel, SocketStream::ptr sock) = 0;
+    virtual void handle(Chan<void*>::ptr cancel, SocketStream::ptr sock) = 0;
 
     virtual void close() = 0;
 };

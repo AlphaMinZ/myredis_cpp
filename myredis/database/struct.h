@@ -12,7 +12,6 @@ namespace alphaMin {
 
 using CmdReceiver = Chan<Reply::ptr>;
 using CmdType = std::string;
-using CmdHandler = std::function<Reply::ptr(Command::ptr)>;
 
 const CmdType CmdTypeExpire = "expire";
 const CmdType CmdTypeExpireAt = "expireat";
@@ -59,21 +58,31 @@ public:
 
     CmdReceiver::ptr& getReceiver() { return m_receiver;}
 
-    std::vector<std::string> getArgs() { return m_args;}
+    std::vector<std::string>& getArgs() { return m_args;}
 
     std::string getCmd() { return m_cmd;}
 
+    Chan<void*>::ptr& getCancelc() { return m_cancelc;}
+
+    void setCmd(CmdType cmd) { m_cmd = cmd;}
+
+    void setArgs(std::vector<std::string> args) { m_args = args;}
+
+    void setReceiver(CmdReceiver::ptr receiver) { m_receiver = receiver;}
+
+    void setCancelc(Chan<void*>::ptr cancelc) { m_cancelc = cancelc;}
 private:
     CmdType m_cmd;
     std::vector<std::string> m_args;
     CmdReceiver::ptr m_receiver;
+    Chan<void*>::ptr m_cancelc;
 };
 
 class Executor {
 public:
     typedef std::shared_ptr<Executor> ptr;
 
-    virtual ~Executor();
+    virtual ~Executor() {}
 
     virtual Chan<Command::ptr>::ptr entrance() = 0;
     virtual bool validCommand(CmdType cmd) = 0;

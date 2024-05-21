@@ -8,6 +8,11 @@
 #include "../handler/persister.h"
 #include "../handler/struct.h"
 #include "../database/struct.h"
+#include "hash.h"
+#include "list.h"
+#include "set.h"
+#include "sorted_set.h"
+#include "string.h"
 
 namespace alphaMin {
 
@@ -33,6 +38,11 @@ public:
 class KVStore : public DataStore {
 public:
     typedef std::shared_ptr<KVStore> ptr;
+
+    virtual void forEach(std::function<void(std::string, CmdAdpter::ptr, uint64_t)>) override;
+
+    virtual void expirePreprocess(std::string key) override;
+    virtual void gc() override;
 
     virtual Reply::ptr expire(Command::ptr cmd) override;
     virtual Reply::ptr expireAt(Command::ptr) override;
@@ -64,6 +74,31 @@ public:
     virtual Reply::ptr zAdd(Command::ptr) override;
     virtual Reply::ptr zRangeByScore(Command::ptr) override;
     virtual Reply::ptr zRem(Command::ptr) override;
+
+    HashMap::ptr getAsHashMap(std::string key);
+    void putAsHashMap(std::string key, HashMap::ptr hmap);
+
+    // 向 m_data 写入数据的成员函数模板
+    template<typename T>
+    void set_data(const std::string& key, T&& value) {
+        m_data[key] = std::make_shared<AnyDerived<std::decay_t<T> > >(std::forward<T>(value));
+    }
+
+    // 读取 m_data 中数据的成员函数模板
+    template<typename T>
+    T get_data(const std::string& key) const {
+        auto it = m_data.find(key);
+        if(it == m_data.end()) {
+            return T{};
+        }
+    
+        auto derived_ptr = std::dynamic_pointer_cast<AnyDerived<T> >(it->second);
+        if(!derived_ptr) {
+            return T{};
+        }
+
+        return derived_ptr->value_;
+    }
 
 private:
     std::unordered_map<std::string, std::shared_ptr<AnyBase>> m_data;

@@ -28,12 +28,12 @@ public:
 
     void run() override;
 
-    void handle(Chan<std::string>::ptr cancel, SocketStream::ptr sock) override;
+    void handle(Chan<void*>::ptr cancel, SocketStream::ptr sock) override;
 
     void close() override;
 private:
-    void handler(Chan<std::string>::ptr cancel, SocketStream::ptr sock);
-    void handleDroplet(Chan<std::string>::ptr cancel, SocketStream::ptr sock, Droplet::ptr droplet);
+    void handler(Chan<void*>::ptr cancel, SocketStream::ptr sock);
+    void handleDroplet(Chan<void*>::ptr cancel, SocketStream::ptr sock, Droplet::ptr droplet);
 private:
     FiberMutex m_mutex;
     std::unordered_set<Socket::ptr> m_conns;

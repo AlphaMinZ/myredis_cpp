@@ -21,7 +21,8 @@ class hashMapEntity : public HashMap {
 public:
     typedef std::shared_ptr<hashMapEntity> ptr;
 
-    hashMapEntity(std::string key);
+    hashMapEntity(std::string key)
+        :m_key(key) {}
 
     virtual void put(std::string key, std::string value) override;
 

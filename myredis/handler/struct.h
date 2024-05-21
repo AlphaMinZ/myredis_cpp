@@ -48,7 +48,7 @@ public:
 
     virtual ~DB() {};
 
-    virtual Reply::ptr Do(Chan<std::string>::ptr cancel, std::vector<std::string> cmdLine) = 0;
+    virtual Reply::ptr Do(Chan<void*>::ptr cancel, std::vector<std::string> cmdLine) = 0;
     virtual void close () = 0;
 };
 

@@ -13,7 +13,7 @@ public:
     DBTrigger(Executor::ptr executor = std::make_shared<Executor>())
         :m_executor(executor) {}
 
-    Reply::ptr Do(Chan<std::string>::ptr cancel, std::vector<std::string> cmdLine) override;
+    Reply::ptr Do(Chan<void*>::ptr cancel, std::vector<std::string> cmdLine) override;
 
     void close() override;
 
