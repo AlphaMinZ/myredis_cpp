@@ -78,6 +78,9 @@ public:
     HashMap::ptr getAsHashMap(std::string key);
     void putAsHashMap(std::string key, HashMap::ptr hmap);
 
+    List::ptr getAsList(std::string key);
+    void putAsList(std::string key, List::ptr list);
+
     // 向 m_data 写入数据的成员函数模板
     template<typename T>
     void set_data(const std::string& key, T&& value) {
