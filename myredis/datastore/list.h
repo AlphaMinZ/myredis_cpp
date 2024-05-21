@@ -29,6 +29,8 @@ class listEntity : public List {
 public:
     typedef std::shared_ptr<listEntity> ptr;
 
+    listEntity() {}
+
     listEntity(std::string key, std::vector<std::string> elements)
         :m_key(key)
         ,m_data(elements) {}
