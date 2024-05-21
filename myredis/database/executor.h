@@ -25,8 +25,8 @@ public:
 private:
     Chan<Command::ptr>::ptr m_ch;
     Chan<void*>::ptr m_cancel;
-    std::unordered_map<CmdType, std::shared_ptr<CmdHandler> > m_cmdHandlers;
-    std::unordered_map<CmdType, CmdHandler> m_cmdHandlers_2;
+    // std::unordered_map<CmdType, std::shared_ptr<CmdHandler> > m_cmdHandlers;
+    std::unordered_map<CmdType, std::function<Reply::ptr(Command::ptr)>> m_cmdHandlers_2;
     DataStore::ptr m_dataStore;
     Timer::ptr m_gcTimer;
 };
