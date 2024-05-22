@@ -10,7 +10,7 @@ class String : public CmdAdpter {
 public:
     typedef std::shared_ptr<String> ptr;
 
-    virtual std::string bytes() = 0;
+    virtual std::string toString() = 0;
 };
 
 class stringEntity : public String {
@@ -21,7 +21,7 @@ public:
         :m_key(key)
         ,m_str(str) {}
 
-    virtual std::string bytes() override;
+    virtual std::string toString() override;
 
     virtual std::vector<std::string> toCmd() override;
 private:

@@ -1,5 +1,5 @@
-#ifndef __ALPHA_MYREDIS_DATASTORE_H__
-#define __ALPHA_MYREDIS_DATASTORE_H__
+#ifndef __ALPHA_MYREDIS_DATASTORE_LIST_H__
+#define __ALPHA_MYREDIS_DATASTORE_LIST_H__
 
 #include <memory>
 #include "../database/struct.h"

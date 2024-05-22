@@ -84,6 +84,9 @@ public:
     Set::ptr getAsSet(std::string key);
     void putAsSet(std::string key, Set::ptr set);
 
+    String::ptr getAsString(std::string key);
+    int64_t put(std::string key, std::string value, bool insertStrategy);
+
     // 向 m_data 写入数据的成员函数模板
     template<typename T>
     void set_data(const std::string& key, T&& value) {
