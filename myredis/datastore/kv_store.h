@@ -4,6 +4,7 @@
 #include <memory>
 #include <string>
 #include <unordered_map>
+#include <type_traits>
 #include "sorted_set.h"
 #include "../handler/persister.h"
 #include "../handler/struct.h"

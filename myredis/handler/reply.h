@@ -10,6 +10,8 @@ namespace alphaMin {
 
 #define CRLF "\r\n"
 
+extern std::string okStrings;
+
 struct OKReply : public Reply {
     typedef std::shared_ptr<OKReply> ptr;
     std::string toString() override {
@@ -17,11 +19,9 @@ struct OKReply : public Reply {
     }
 };
 
-OKReply::ptr newOKReply() { return theOKReply;}
+extern OKReply::ptr theOKReply;
 
-std::string okStrings = "+OK\r\n";
-
-auto theOKReply = std::make_shared<OKReply>();
+OKReply::ptr newOKReply();
 
 // 简单字符串类型. 协议为 【+】【string】【CRLF】
 struct SimpleStringReply : public Reply {
@@ -55,12 +55,10 @@ struct SyntaxErrReply : public Reply {
     std::string error() { return "Err syntax error";}
 };
 
-std::string syntaxErrBytes = "-Err syntax error\r\n";
-auto theSyntaxErrReply = std::make_shared<SyntaxErrReply>();
+extern std::string syntaxErrBytes;
+extern SyntaxErrReply::ptr theSyntaxErrReply;
 
-SyntaxErrReply::ptr newSyntaxErrReply() {
-    return theSyntaxErrReply;
-}
+SyntaxErrReply::ptr newSyntaxErrReply();
 
 // 数据类型错误
 struct WrongTypeErrReply : public Reply {
@@ -70,12 +68,10 @@ struct WrongTypeErrReply : public Reply {
     std::string error() { return "WRONGTYPE Operation against a key holding the wrong kind of value";}
 };
 
-std::string wrongTypeErrBytes = "-WRONGTYPE Operation against a key holding the wrong kind of value\r\n";
-auto theWrongTypeErrReply = std::make_shared<WrongTypeErrReply>();
+extern std::string wrongTypeErrBytes;
+extern WrongTypeErrReply::ptr theWrongTypeErrReply;
 
-WrongTypeErrReply::ptr newWrongTypeErrReply() {
-    return theWrongTypeErrReply;
-}
+WrongTypeErrReply::ptr newWrongTypeErrReply();
 
 // 错误类型. 协议为 【-】【err】【CRLF】
 struct ErrReply : public Reply {
@@ -89,18 +85,17 @@ struct ErrReply : public Reply {
     std::string errStr_;
 };
 
+extern std::string nillBulkBytes;
+
 struct NillReply : public Reply {
     typedef std::shared_ptr<NillReply> ptr;
 
     std::string toString() override { return nillBulkBytes;}
 };
 
-auto nillReply = std::make_shared<NillReply>();
-std::string nillBulkBytes = "$-1\r\n";
+extern NillReply::ptr nillReply;
 
-NillReply::ptr newNillReply() {
-    return nillReply;
-}
+NillReply::ptr newNillReply();
 
 // 定长字符串类型，协议固定为 【$】【length】【CRLF】【content】【CRLF】
 struct BulkReply : public Reply {
@@ -115,12 +110,14 @@ struct BulkReply : public Reply {
 };
 
 // 数组类型. 协议固定为 【*】【arr.length】【CRLF】+ arr.length * (【$】【length】【CRLF】【content】【CRLF】)
-class MultiBulkReply : public MultiReply, Reply {
+class MultiBulkReply : public MultiReply, public Reply {
 public:
     typedef std::shared_ptr<MultiBulkReply> ptr;
 
     MultiBulkReply(std::vector<std::string> args)
         :m_args(args) {}
+
+    MultiBulkReply() = default; 
 
     std::vector<std::string> getArgs() override { return m_args;}
 
@@ -129,6 +126,7 @@ private:
     std::vector<std::string> m_args;
 };
 
+extern std::string emptyMultiBulkBytes;
 // 空数组类型. 采用单例，协议固定为【*】【0】【CRLF】
 struct EmptyMultiBulkReply : public Reply {
     typedef std::shared_ptr<EmptyMultiBulkReply> ptr;
@@ -137,8 +135,6 @@ struct EmptyMultiBulkReply : public Reply {
 
     std::string toString() override { return emptyMultiBulkBytes;}
 };
-
-std::string emptyMultiBulkBytes = "*0\r\n";
 
 }
 

@@ -25,7 +25,7 @@ class Server : public std::enable_shared_from_this<Server> {
 public:
     typedef std::shared_ptr<Server> ptr;
 
-    Server(Handler::ptr handler = std::make_shared<Handler>(), 
+    Server(Handler::ptr handler, 
             Logger::ptr logger = ALPHA_LOG_NAME("Server"),
             Chan<std::string>::ptr stopc = std::make_shared<Chan<std::string> >())
         :m_handler(handler)

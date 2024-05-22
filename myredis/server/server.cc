@@ -72,7 +72,7 @@ void Server::listenAndServe(Socket::ptr listener, Chan<std::string>::ptr closec)
     Chan<std::string>::ptr errorc(new Chan<std::string>(1));
 
     // 遇到意外错误，则终止流程
-    Chan<std::string>::ptr cancel(new Chan<std::string>);
+    Chan<void*>::ptr cancel(new Chan<void*>);
 
     auto this_server = shared_from_this();
 

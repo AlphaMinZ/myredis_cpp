@@ -27,19 +27,31 @@ public:
     virtual std::vector<std::string> getArgs() = 0;
 };
 
+class MultiBulkReply;
+
 struct Droplet {
     typedef std::shared_ptr<Droplet> ptr;
+    typedef std::shared_ptr<Reply> ReplyPtr;
 
-    Droplet(Reply::ptr reply = std::make_shared<Reply>(), bool haveErr = false)
+    Droplet(ReplyPtr reply = nullptr, bool haveErr = false)
         :reply_(reply)
         ,haveErr_(haveErr) {}
 
-    bool terminated() {
-        return haveErr_;
-    }
+    // Droplet(std::shared_ptr<MultiBulkReply> reply, bool haveErr = false)
+    //     :reply_(std::static_pointer_cast<Reply>(reply))
+    //     ,haveErr_(haveErr) {}
+
+    Droplet() = default;
 
     Reply::ptr reply_;
     bool haveErr_ = false;
+
+    void setReply(Reply::ptr reply) { reply_ = reply;}
+    void sethaveErr(bool haveErr) { haveErr_ = haveErr;}
+
+    bool terminated() {
+        return haveErr_;
+    }  
 };
 
 class DB {

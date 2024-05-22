@@ -6,7 +6,7 @@ namespace alphaMin {
 Set::ptr KVStore::getAsSet(std::string key) {
     auto v = get_data<Set::ptr>(key);
     if(v.get() == nullptr) {
-        return std::make_shared<Set>();
+        return std::shared_ptr<Set>(nullptr);
     }
 
     return v;

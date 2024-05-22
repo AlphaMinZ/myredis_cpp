@@ -6,7 +6,7 @@ namespace alphaMin {
 HashMap::ptr KVStore::getAsHashMap(std::string key) {
     auto v = get_data<HashMap::ptr>(key);
     if(v.get() == nullptr) {
-        return std::make_shared<HashMap>();
+        return std::shared_ptr<HashMap>(nullptr);
     }
 
     return v;

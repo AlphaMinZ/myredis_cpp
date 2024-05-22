@@ -54,7 +54,7 @@ public:
         :m_cmd(cmd)
         ,m_args(args) {}
 
-    ~Command();
+    ~Command() {}
 
     CmdReceiver::ptr& getReceiver() { return m_receiver;}
 
@@ -93,7 +93,7 @@ class CmdAdpter {
 public:
     typedef std::shared_ptr<CmdAdpter> ptr;
 
-    virtual ~CmdAdpter();
+    virtual ~CmdAdpter() {}
     virtual std::vector<std::string> toCmd() = 0;
 };
 

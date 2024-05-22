@@ -23,7 +23,7 @@ void skiplist::add(int64_t score, std::string member) {
     // 新插入，roll 出高度
     auto height = roll();
     while(m_head->nexts_.size() < height + 1) {
-        m_head->nexts_.push_back(std::make_shared<skipnode>());
+        m_head->nexts_.push_back(std::shared_ptr<skipnode>(nullptr));
     }
 
     skipnode::ptr inserted(new skipnode(score, height + 1));
@@ -133,7 +133,7 @@ void skiplist::rem(int64_t score, std::string member) {
 
         auto remed = move->nexts_[i];
         move->nexts_[i] = move->nexts_[i]->nexts_[i];
-        remed->nexts_[i] = std::make_shared<alphaMin::skipnode>();
+        remed->nexts_[i] = std::shared_ptr<alphaMin::skipnode>(nullptr);
     }
 }
 

@@ -4,11 +4,11 @@ set(CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH} ${CMAKE_CURRENT_SOURCE_DIR}/cmake)
 
 project(myredis)
 
-set(CMAKE_CXX_STANDARD 11)
+set(CMAKE_CXX_STANDARD 11 14)
 
 include_directories(./myredis/*)
 
-file(GLOB SRC ${CMAKE_CURRENT_SOURCE_DIR}/myredis/*.cc)
+file(GLOB SRC ${CMAKE_CURRENT_SOURCE_DIR}/myredis/*/*.cc)
 
 link_directories(${CMAKE_CURRENT_SOURCE_DIR}/lib)
 

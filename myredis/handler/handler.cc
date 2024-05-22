@@ -24,7 +24,7 @@ void Handle::handle(Chan<void*>::ptr cancel, SocketStream::ptr sockStream) {
 }
 
 void Handle::handler(Chan<void*>::ptr cancel, SocketStream::ptr sockStream) {
-    auto stream = m_parser->parseStream(std::make_shared<SocketStream>(sockStream));
+    auto stream = m_parser->parseStream(std::make_shared<SocketStream>(sockStream->getSocket()));
 
     auto cond = std::make_shared<FiberCondition>();
     auto mutex = std::make_shared<FiberMutex>();

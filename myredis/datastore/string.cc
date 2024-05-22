@@ -6,7 +6,7 @@ namespace alphaMin {
 String::ptr KVStore::getAsString(std::string key) {
     auto v = get_data<String::ptr>(key);
     if(v.get() == nullptr) {
-        return std::make_shared<String>();
+        return std::shared_ptr<String>(nullptr);
     }
 
     return v;
@@ -18,7 +18,7 @@ int64_t KVStore::put(std::string key, std::string value, bool insertStrategy) {
         return 0;
     }
 
-    set_data(key, std::make_shared<String>(key, value));
+    set_data(key, std::make_shared<stringEntity>(key, value));
     return 1;
 }
 

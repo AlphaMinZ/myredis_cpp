@@ -18,8 +18,8 @@ public:
     typedef std::shared_ptr<Handler> ptr;
 
     Handle(Logger::ptr logger = ALPHA_LOG_NAME("Handler"), 
-            Parser::ptr parser = std::make_shared<Parser>(),
-            DB::ptr db = std::make_shared<DB>())
+            Parser::ptr parser = nullptr,
+            DB::ptr db = nullptr)
         :m_logger(logger)
         ,m_parser(parser)
         ,m_db(db) {}

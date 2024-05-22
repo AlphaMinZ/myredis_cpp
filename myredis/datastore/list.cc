@@ -6,7 +6,7 @@ namespace alphaMin {
 List::ptr KVStore::getAsList(std::string key) {
     auto v = get_data<List::ptr>(key);
     if(v.get() == nullptr) {
-        return std::make_shared<List>();
+        return std::shared_ptr<List>(nullptr);
     }
 
     return v;

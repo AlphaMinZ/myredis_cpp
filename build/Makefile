@@ -123,6 +123,357 @@ test_test/fast:
 	$(MAKE) -f CMakeFiles/test_test.dir/build.make CMakeFiles/test_test.dir/build
 .PHONY : test_test/fast
 
+myredis/database/executor.o: myredis/database/executor.cc.o
+
+.PHONY : myredis/database/executor.o
+
+# target to build an object file
+myredis/database/executor.cc.o:
+	$(MAKE) -f CMakeFiles/test_test.dir/build.make CMakeFiles/test_test.dir/myredis/database/executor.cc.o
+.PHONY : myredis/database/executor.cc.o
+
+myredis/database/executor.i: myredis/database/executor.cc.i
+
+.PHONY : myredis/database/executor.i
+
+# target to preprocess a source file
+myredis/database/executor.cc.i:
+	$(MAKE) -f CMakeFiles/test_test.dir/build.make CMakeFiles/test_test.dir/myredis/database/executor.cc.i
+.PHONY : myredis/database/executor.cc.i
+
+myredis/database/executor.s: myredis/database/executor.cc.s
+
+.PHONY : myredis/database/executor.s
+
+# target to generate assembly for a file
+myredis/database/executor.cc.s:
+	$(MAKE) -f CMakeFiles/test_test.dir/build.make CMakeFiles/test_test.dir/myredis/database/executor.cc.s
+.PHONY : myredis/database/executor.cc.s
+
+myredis/database/trigger.o: myredis/database/trigger.cc.o
+
+.PHONY : myredis/database/trigger.o
+
+# target to build an object file
+myredis/database/trigger.cc.o:
+	$(MAKE) -f CMakeFiles/test_test.dir/build.make CMakeFiles/test_test.dir/myredis/database/trigger.cc.o
+.PHONY : myredis/database/trigger.cc.o
+
+myredis/database/trigger.i: myredis/database/trigger.cc.i
+
+.PHONY : myredis/database/trigger.i
+
+# target to preprocess a source file
+myredis/database/trigger.cc.i:
+	$(MAKE) -f CMakeFiles/test_test.dir/build.make CMakeFiles/test_test.dir/myredis/database/trigger.cc.i
+.PHONY : myredis/database/trigger.cc.i
+
+myredis/database/trigger.s: myredis/database/trigger.cc.s
+
+.PHONY : myredis/database/trigger.s
+
+# target to generate assembly for a file
+myredis/database/trigger.cc.s:
+	$(MAKE) -f CMakeFiles/test_test.dir/build.make CMakeFiles/test_test.dir/myredis/database/trigger.cc.s
+.PHONY : myredis/database/trigger.cc.s
+
+myredis/datastore/expire.o: myredis/datastore/expire.cc.o
+
+.PHONY : myredis/datastore/expire.o
+
+# target to build an object file
+myredis/datastore/expire.cc.o:
+	$(MAKE) -f CMakeFiles/test_test.dir/build.make CMakeFiles/test_test.dir/myredis/datastore/expire.cc.o
+.PHONY : myredis/datastore/expire.cc.o
+
+myredis/datastore/expire.i: myredis/datastore/expire.cc.i
+
+.PHONY : myredis/datastore/expire.i
+
+# target to preprocess a source file
+myredis/datastore/expire.cc.i:
+	$(MAKE) -f CMakeFiles/test_test.dir/build.make CMakeFiles/test_test.dir/myredis/datastore/expire.cc.i
+.PHONY : myredis/datastore/expire.cc.i
+
+myredis/datastore/expire.s: myredis/datastore/expire.cc.s
+
+.PHONY : myredis/datastore/expire.s
+
+# target to generate assembly for a file
+myredis/datastore/expire.cc.s:
+	$(MAKE) -f CMakeFiles/test_test.dir/build.make CMakeFiles/test_test.dir/myredis/datastore/expire.cc.s
+.PHONY : myredis/datastore/expire.cc.s
+
+myredis/datastore/hash.o: myredis/datastore/hash.cc.o
+
+.PHONY : myredis/datastore/hash.o
+
+# target to build an object file
+myredis/datastore/hash.cc.o:
+	$(MAKE) -f CMakeFiles/test_test.dir/build.make CMakeFiles/test_test.dir/myredis/datastore/hash.cc.o
+.PHONY : myredis/datastore/hash.cc.o
+
+myredis/datastore/hash.i: myredis/datastore/hash.cc.i
+
+.PHONY : myredis/datastore/hash.i
+
+# target to preprocess a source file
+myredis/datastore/hash.cc.i:
+	$(MAKE) -f CMakeFiles/test_test.dir/build.make CMakeFiles/test_test.dir/myredis/datastore/hash.cc.i
+.PHONY : myredis/datastore/hash.cc.i
+
+myredis/datastore/hash.s: myredis/datastore/hash.cc.s
+
+.PHONY : myredis/datastore/hash.s
+
+# target to generate assembly for a file
+myredis/datastore/hash.cc.s:
+	$(MAKE) -f CMakeFiles/test_test.dir/build.make CMakeFiles/test_test.dir/myredis/datastore/hash.cc.s
+.PHONY : myredis/datastore/hash.cc.s
+
+myredis/datastore/list.o: myredis/datastore/list.cc.o
+
+.PHONY : myredis/datastore/list.o
+
+# target to build an object file
+myredis/datastore/list.cc.o:
+	$(MAKE) -f CMakeFiles/test_test.dir/build.make CMakeFiles/test_test.dir/myredis/datastore/list.cc.o
+.PHONY : myredis/datastore/list.cc.o
+
+myredis/datastore/list.i: myredis/datastore/list.cc.i
+
+.PHONY : myredis/datastore/list.i
+
+# target to preprocess a source file
+myredis/datastore/list.cc.i:
+	$(MAKE) -f CMakeFiles/test_test.dir/build.make CMakeFiles/test_test.dir/myredis/datastore/list.cc.i
+.PHONY : myredis/datastore/list.cc.i
+
+myredis/datastore/list.s: myredis/datastore/list.cc.s
+
+.PHONY : myredis/datastore/list.s
+
+# target to generate assembly for a file
+myredis/datastore/list.cc.s:
+	$(MAKE) -f CMakeFiles/test_test.dir/build.make CMakeFiles/test_test.dir/myredis/datastore/list.cc.s
+.PHONY : myredis/datastore/list.cc.s
+
+myredis/datastore/set.o: myredis/datastore/set.cc.o
+
+.PHONY : myredis/datastore/set.o
+
+# target to build an object file
+myredis/datastore/set.cc.o:
+	$(MAKE) -f CMakeFiles/test_test.dir/build.make CMakeFiles/test_test.dir/myredis/datastore/set.cc.o
+.PHONY : myredis/datastore/set.cc.o
+
+myredis/datastore/set.i: myredis/datastore/set.cc.i
+
+.PHONY : myredis/datastore/set.i
+
+# target to preprocess a source file
+myredis/datastore/set.cc.i:
+	$(MAKE) -f CMakeFiles/test_test.dir/build.make CMakeFiles/test_test.dir/myredis/datastore/set.cc.i
+.PHONY : myredis/datastore/set.cc.i
+
+myredis/datastore/set.s: myredis/datastore/set.cc.s
+
+.PHONY : myredis/datastore/set.s
+
+# target to generate assembly for a file
+myredis/datastore/set.cc.s:
+	$(MAKE) -f CMakeFiles/test_test.dir/build.make CMakeFiles/test_test.dir/myredis/datastore/set.cc.s
+.PHONY : myredis/datastore/set.cc.s
+
+myredis/datastore/sorted_set.o: myredis/datastore/sorted_set.cc.o
+
+.PHONY : myredis/datastore/sorted_set.o
+
+# target to build an object file
+myredis/datastore/sorted_set.cc.o:
+	$(MAKE) -f CMakeFiles/test_test.dir/build.make CMakeFiles/test_test.dir/myredis/datastore/sorted_set.cc.o
+.PHONY : myredis/datastore/sorted_set.cc.o
+
+myredis/datastore/sorted_set.i: myredis/datastore/sorted_set.cc.i
+
+.PHONY : myredis/datastore/sorted_set.i
+
+# target to preprocess a source file
+myredis/datastore/sorted_set.cc.i:
+	$(MAKE) -f CMakeFiles/test_test.dir/build.make CMakeFiles/test_test.dir/myredis/datastore/sorted_set.cc.i
+.PHONY : myredis/datastore/sorted_set.cc.i
+
+myredis/datastore/sorted_set.s: myredis/datastore/sorted_set.cc.s
+
+.PHONY : myredis/datastore/sorted_set.s
+
+# target to generate assembly for a file
+myredis/datastore/sorted_set.cc.s:
+	$(MAKE) -f CMakeFiles/test_test.dir/build.make CMakeFiles/test_test.dir/myredis/datastore/sorted_set.cc.s
+.PHONY : myredis/datastore/sorted_set.cc.s
+
+myredis/datastore/string.o: myredis/datastore/string.cc.o
+
+.PHONY : myredis/datastore/string.o
+
+# target to build an object file
+myredis/datastore/string.cc.o:
+	$(MAKE) -f CMakeFiles/test_test.dir/build.make CMakeFiles/test_test.dir/myredis/datastore/string.cc.o
+.PHONY : myredis/datastore/string.cc.o
+
+myredis/datastore/string.i: myredis/datastore/string.cc.i
+
+.PHONY : myredis/datastore/string.i
+
+# target to preprocess a source file
+myredis/datastore/string.cc.i:
+	$(MAKE) -f CMakeFiles/test_test.dir/build.make CMakeFiles/test_test.dir/myredis/datastore/string.cc.i
+.PHONY : myredis/datastore/string.cc.i
+
+myredis/datastore/string.s: myredis/datastore/string.cc.s
+
+.PHONY : myredis/datastore/string.s
+
+# target to generate assembly for a file
+myredis/datastore/string.cc.s:
+	$(MAKE) -f CMakeFiles/test_test.dir/build.make CMakeFiles/test_test.dir/myredis/datastore/string.cc.s
+.PHONY : myredis/datastore/string.cc.s
+
+myredis/handler/handler.o: myredis/handler/handler.cc.o
+
+.PHONY : myredis/handler/handler.o
+
+# target to build an object file
+myredis/handler/handler.cc.o:
+	$(MAKE) -f CMakeFiles/test_test.dir/build.make CMakeFiles/test_test.dir/myredis/handler/handler.cc.o
+.PHONY : myredis/handler/handler.cc.o
+
+myredis/handler/handler.i: myredis/handler/handler.cc.i
+
+.PHONY : myredis/handler/handler.i
+
+# target to preprocess a source file
+myredis/handler/handler.cc.i:
+	$(MAKE) -f CMakeFiles/test_test.dir/build.make CMakeFiles/test_test.dir/myredis/handler/handler.cc.i
+.PHONY : myredis/handler/handler.cc.i
+
+myredis/handler/handler.s: myredis/handler/handler.cc.s
+
+.PHONY : myredis/handler/handler.s
+
+# target to generate assembly for a file
+myredis/handler/handler.cc.s:
+	$(MAKE) -f CMakeFiles/test_test.dir/build.make CMakeFiles/test_test.dir/myredis/handler/handler.cc.s
+.PHONY : myredis/handler/handler.cc.s
+
+myredis/handler/reply.o: myredis/handler/reply.cc.o
+
+.PHONY : myredis/handler/reply.o
+
+# target to build an object file
+myredis/handler/reply.cc.o:
+	$(MAKE) -f CMakeFiles/test_test.dir/build.make CMakeFiles/test_test.dir/myredis/handler/reply.cc.o
+.PHONY : myredis/handler/reply.cc.o
+
+myredis/handler/reply.i: myredis/handler/reply.cc.i
+
+.PHONY : myredis/handler/reply.i
+
+# target to preprocess a source file
+myredis/handler/reply.cc.i:
+	$(MAKE) -f CMakeFiles/test_test.dir/build.make CMakeFiles/test_test.dir/myredis/handler/reply.cc.i
+.PHONY : myredis/handler/reply.cc.i
+
+myredis/handler/reply.s: myredis/handler/reply.cc.s
+
+.PHONY : myredis/handler/reply.s
+
+# target to generate assembly for a file
+myredis/handler/reply.cc.s:
+	$(MAKE) -f CMakeFiles/test_test.dir/build.make CMakeFiles/test_test.dir/myredis/handler/reply.cc.s
+.PHONY : myredis/handler/reply.cc.s
+
+myredis/persist/file_io.o: myredis/persist/file_io.cc.o
+
+.PHONY : myredis/persist/file_io.o
+
+# target to build an object file
+myredis/persist/file_io.cc.o:
+	$(MAKE) -f CMakeFiles/test_test.dir/build.make CMakeFiles/test_test.dir/myredis/persist/file_io.cc.o
+.PHONY : myredis/persist/file_io.cc.o
+
+myredis/persist/file_io.i: myredis/persist/file_io.cc.i
+
+.PHONY : myredis/persist/file_io.i
+
+# target to preprocess a source file
+myredis/persist/file_io.cc.i:
+	$(MAKE) -f CMakeFiles/test_test.dir/build.make CMakeFiles/test_test.dir/myredis/persist/file_io.cc.i
+.PHONY : myredis/persist/file_io.cc.i
+
+myredis/persist/file_io.s: myredis/persist/file_io.cc.s
+
+.PHONY : myredis/persist/file_io.s
+
+# target to generate assembly for a file
+myredis/persist/file_io.cc.s:
+	$(MAKE) -f CMakeFiles/test_test.dir/build.make CMakeFiles/test_test.dir/myredis/persist/file_io.cc.s
+.PHONY : myredis/persist/file_io.cc.s
+
+myredis/protocol/parser.o: myredis/protocol/parser.cc.o
+
+.PHONY : myredis/protocol/parser.o
+
+# target to build an object file
+myredis/protocol/parser.cc.o:
+	$(MAKE) -f CMakeFiles/test_test.dir/build.make CMakeFiles/test_test.dir/myredis/protocol/parser.cc.o
+.PHONY : myredis/protocol/parser.cc.o
+
+myredis/protocol/parser.i: myredis/protocol/parser.cc.i
+
+.PHONY : myredis/protocol/parser.i
+
+# target to preprocess a source file
+myredis/protocol/parser.cc.i:
+	$(MAKE) -f CMakeFiles/test_test.dir/build.make CMakeFiles/test_test.dir/myredis/protocol/parser.cc.i
+.PHONY : myredis/protocol/parser.cc.i
+
+myredis/protocol/parser.s: myredis/protocol/parser.cc.s
+
+.PHONY : myredis/protocol/parser.s
+
+# target to generate assembly for a file
+myredis/protocol/parser.cc.s:
+	$(MAKE) -f CMakeFiles/test_test.dir/build.make CMakeFiles/test_test.dir/myredis/protocol/parser.cc.s
+.PHONY : myredis/protocol/parser.cc.s
+
+myredis/server/server.o: myredis/server/server.cc.o
+
+.PHONY : myredis/server/server.o
+
+# target to build an object file
+myredis/server/server.cc.o:
+	$(MAKE) -f CMakeFiles/test_test.dir/build.make CMakeFiles/test_test.dir/myredis/server/server.cc.o
+.PHONY : myredis/server/server.cc.o
+
+myredis/server/server.i: myredis/server/server.cc.i
+
+.PHONY : myredis/server/server.i
+
+# target to preprocess a source file
+myredis/server/server.cc.i:
+	$(MAKE) -f CMakeFiles/test_test.dir/build.make CMakeFiles/test_test.dir/myredis/server/server.cc.i
+.PHONY : myredis/server/server.cc.i
+
+myredis/server/server.s: myredis/server/server.cc.s
+
+.PHONY : myredis/server/server.s
+
+# target to generate assembly for a file
+myredis/server/server.cc.s:
+	$(MAKE) -f CMakeFiles/test_test.dir/build.make CMakeFiles/test_test.dir/myredis/server/server.cc.s
+.PHONY : myredis/server/server.cc.s
+
 tests/test.o: tests/test.cc.o
 
 .PHONY : tests/test.o
@@ -159,6 +510,45 @@ help:
 	@echo "... edit_cache"
 	@echo "... rebuild_cache"
 	@echo "... test_test"
+	@echo "... myredis/database/executor.o"
+	@echo "... myredis/database/executor.i"
+	@echo "... myredis/database/executor.s"
+	@echo "... myredis/database/trigger.o"
+	@echo "... myredis/database/trigger.i"
+	@echo "... myredis/database/trigger.s"
+	@echo "... myredis/datastore/expire.o"
+	@echo "... myredis/datastore/expire.i"
+	@echo "... myredis/datastore/expire.s"
+	@echo "... myredis/datastore/hash.o"
+	@echo "... myredis/datastore/hash.i"
+	@echo "... myredis/datastore/hash.s"
+	@echo "... myredis/datastore/list.o"
+	@echo "... myredis/datastore/list.i"
+	@echo "... myredis/datastore/list.s"
+	@echo "... myredis/datastore/set.o"
+	@echo "... myredis/datastore/set.i"
+	@echo "... myredis/datastore/set.s"
+	@echo "... myredis/datastore/sorted_set.o"
+	@echo "... myredis/datastore/sorted_set.i"
+	@echo "... myredis/datastore/sorted_set.s"
+	@echo "... myredis/datastore/string.o"
+	@echo "... myredis/datastore/string.i"
+	@echo "... myredis/datastore/string.s"
+	@echo "... myredis/handler/handler.o"
+	@echo "... myredis/handler/handler.i"
+	@echo "... myredis/handler/handler.s"
+	@echo "... myredis/handler/reply.o"
+	@echo "... myredis/handler/reply.i"
+	@echo "... myredis/handler/reply.s"
+	@echo "... myredis/persist/file_io.o"
+	@echo "... myredis/persist/file_io.i"
+	@echo "... myredis/persist/file_io.s"
+	@echo "... myredis/protocol/parser.o"
+	@echo "... myredis/protocol/parser.i"
+	@echo "... myredis/protocol/parser.s"
+	@echo "... myredis/server/server.o"
+	@echo "... myredis/server/server.i"
+	@echo "... myredis/server/server.s"
 	@echo "... tests/test.o"
 	@echo "... tests/test.i"
 	@echo "... tests/test.s"

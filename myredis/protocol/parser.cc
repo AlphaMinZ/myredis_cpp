@@ -104,7 +104,10 @@ Droplet::ptr Parse::parseMultiBulk(std::string header, SocketStream::ptr sockStr
         lines.push_back(bulkBody);
     }
 
-    return std::make_shared<Droplet>(std::make_shared<MultiBulkReply>(lines));
+    std::shared_ptr<MultiBulkReply> multiBulkReply = std::make_shared<MultiBulkReply>(lines);
+    Droplet::ptr ret(new Droplet(multiBulkReply, false));
+    // return std::make_shared<Droplet>(std::make_shared<MultiBulkReply>(lines), false);
+    return ret;
 }
 
 }

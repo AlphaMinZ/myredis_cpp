@@ -3,6 +3,17 @@
 
 namespace alphaMin {
 
+std::string okStrings = "+OK\r\n";
+std::string syntaxErrBytes = "-Err syntax error\r\n";
+std::string wrongTypeErrBytes = "-WRONGTYPE Operation against a key holding the wrong kind of value\r\n";
+std::string nillBulkBytes = "$-1\r\n";
+std::string emptyMultiBulkBytes = "*0\r\n";
+
+OKReply::ptr theOKReply = std::make_shared<OKReply>();
+SyntaxErrReply::ptr theSyntaxErrReply = std::make_shared<SyntaxErrReply>();
+WrongTypeErrReply::ptr theWrongTypeErrReply = std::make_shared<WrongTypeErrReply>();
+NillReply::ptr nillReply = std::make_shared<NillReply>();
+
 std::string SimpleStringReply::toString() {
     return "+" + str_ + CRLF;
 }
@@ -43,6 +54,20 @@ std::string MultiBulkReply::toString() {
     } 
 
     return os.str();
+}
+
+OKReply::ptr newOKReply() { return theOKReply;}
+
+SyntaxErrReply::ptr newSyntaxErrReply() {
+    return theSyntaxErrReply;
+}
+
+WrongTypeErrReply::ptr newWrongTypeErrReply() {
+    return theWrongTypeErrReply;
+}
+
+NillReply::ptr newNillReply() {
+    return nillReply;
 }
 
 }

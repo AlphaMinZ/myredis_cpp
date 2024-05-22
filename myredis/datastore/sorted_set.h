@@ -6,6 +6,7 @@
 #include <string>
 #include <unordered_map>
 #include <unordered_set>
+#include "../database/struct.h"
 
 namespace alphaMin {
 
