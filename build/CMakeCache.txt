@@ -177,9 +177,6 @@ MYSQL_CONFIG_EXECUTABLE:FILEPATH=/usr/bin/mysql_config
 //Path to a library.
 MYSQL_LIB:FILEPATH=/usr/lib64/mysql/libmysqlclient.so
 
-//The directory containing a CMake configuration file for MySQL.
-MySQL_DIR:PATH=MySQL_DIR-NOTFOUND
-
 //Path to a library.
 OPENSSL_CRYPTO_LIBRARY:FILEPATH=/usr/lib64/libcrypto.so
 

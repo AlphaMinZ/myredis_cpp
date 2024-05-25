@@ -110,4 +110,16 @@ Droplet::ptr Parse::parseMultiBulk(std::string header, SocketStream::ptr sockStr
     return ret;
 }
 
+Parse::ptr newParser(Logger::ptr logger) {
+    auto p = std::make_shared<Parse>(logger);
+    
+    p->setLineParser('+', std::bind(&Parse::parseSimpleString_pb, p, std::placeholders::_1, std::placeholders::_2));
+    p->setLineParser('-', std::bind(&Parse::parseError_pb, p, std::placeholders::_1, std::placeholders::_2));
+    p->setLineParser(':', std::bind(&Parse::parseInt_pb, p, std::placeholders::_1, std::placeholders::_2));
+    p->setLineParser('$', std::bind(&Parse::parseBulk_pb, p, std::placeholders::_1, std::placeholders::_2));
+    p->setLineParser('*', std::bind(&Parse::parseMultiBulk_pb, p, std::placeholders::_1, std::placeholders::_2));
+
+    return p;
+}
+
 }

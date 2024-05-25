@@ -40,6 +40,10 @@ class KVStore : public DataStore {
 public:
     typedef std::shared_ptr<KVStore> ptr;
 
+    KVStore(Persister::ptr persister = std::shared_ptr<Persister>(nullptr))
+        :m_expireTimeWheel(std::make_shared<skiplist>("expireTimeWheel"))
+        ,m_persister(persister) {}
+
     virtual void forEach(std::function<void(std::string, CmdAdpter::ptr, uint64_t)>) override;
 
     virtual void expirePreprocess(std::string key) override;
@@ -109,6 +113,10 @@ public:
 
         return derived_ptr->value_;
     }
+
+private:
+    void expireProcess(std::string key);
+    void expire(std::string key, uint64_t expiredAt);
 
 private:
     std::unordered_map<std::string, std::shared_ptr<AnyBase>> m_data;

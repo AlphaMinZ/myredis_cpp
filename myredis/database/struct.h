@@ -60,7 +60,12 @@ public:
 
     std::vector<std::string>& getArgs() { return m_args;}
 
-    std::string getCmd() { return m_cmd;}
+    std::vector<std::string> getCmd() { 
+        std::vector<std::string> tmp;
+        tmp.push_back(m_cmd);
+        tmp.insert(tmp.end(), m_args.begin(), m_args.end());
+        return tmp;
+    }
 
     Chan<void*>::ptr& getCancelc() { return m_cancelc;}
 
