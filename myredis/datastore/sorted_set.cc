@@ -5,6 +5,19 @@
 
 namespace alphaMin {
 
+SortedSet::ptr KVStore::getAsSortedSet(std::string key) {
+    auto v = get_data<SortedSet::ptr>(key);
+    if(v.get() == nullptr) {
+        return std::shared_ptr<SortedSet>(nullptr);
+    }
+
+    return v;
+}
+
+void KVStore::putAsSortedSet(std::string key, SortedSet::ptr zset) {
+    set_data(key, zset);
+}
+
 void skiplist::add(int64_t score, std::string member) {
     // 之前存在，需要删除
     auto oldScore = m_memberToScore.find(member);

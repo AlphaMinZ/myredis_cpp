@@ -78,9 +78,9 @@ Reply::ptr KVStore::set(Command::ptr cmd) {
     auto key = args[0];
     auto value = args[1];
 
-    bool insertStrategy;
-    bool ttlStrategy;
-    int64_t ttlSeconds;
+    bool insertStrategy = false;
+    bool ttlStrategy = false;
+    int64_t ttlSeconds = 0;
     auto ttlIndex = -1;
 
     for(int i = 2; i < args.size(); ++i) {
@@ -173,9 +173,9 @@ Reply::ptr KVStore::lPush(Command::ptr cmd) {
 Reply::ptr KVStore::lPop(Command::ptr cmd) {
     auto args = cmd->getArgs();
     auto key = args[0];
-    int64_t cnt;
+    int64_t cnt = 0;
     if(args.size() > 1) {
-        int64_t rawCnt;
+        int64_t rawCnt = 0;
         try {
             rawCnt = std::stoll(args[1]);
         }
@@ -232,9 +232,9 @@ Reply::ptr KVStore::rPush(Command::ptr cmd) {
 Reply::ptr KVStore::rPop(Command::ptr cmd) {
     auto args = cmd->getArgs();
     auto key = args[0];
-    int64_t cnt;
+    int64_t cnt = 0;
     if(args.size() > 1) {
-        int64_t rawCnt;
+        int64_t rawCnt = 0;
         try {
             rawCnt = std::stoll(args[1]);
         }
@@ -277,7 +277,7 @@ Reply::ptr KVStore::lRange(Command::ptr cmd) {
     }
 
     auto key = args[0];
-    int64_t start;
+    int64_t start = 0;
     try {
         start = std::stoll(args[1]);
     }
@@ -285,7 +285,7 @@ Reply::ptr KVStore::lRange(Command::ptr cmd) {
         return newSyntaxErrReply();
     }
 
-    int64_t stop;
+    int64_t stop = 0;
     try {
         stop = std::stoll(args[2]);
     }
@@ -317,7 +317,7 @@ Reply::ptr KVStore::sAdd(Command::ptr cmd) {
         putAsSet(key, set);
     }
 
-    int64_t added;
+    int64_t added = 0;
     for(int i = 1; i < args.size(); ++i) {
         added += set->add(args[i]);
     }
@@ -327,37 +327,200 @@ Reply::ptr KVStore::sAdd(Command::ptr cmd) {
 }
 
 Reply::ptr KVStore::sIsMember(Command::ptr cmd) {
+    auto args = cmd->getArgs();
+    if(args.size() != 2) {
+        return newSyntaxErrReply();
+    }
 
+    auto key = args[0];
+    auto set = getAsSet(key);
+    
+    if(set.get() == nullptr) {
+        return std::make_shared<IntReply>(0);
+    }
+
+    return std::make_shared<IntReply>(set->exist(args[1]));
 }
 
 Reply::ptr KVStore::sRem(Command::ptr cmd) {
+    auto args = cmd->getArgs();
+    auto key = args[0];
+    auto set = getAsSet(key);
 
+    if(set.get() == nullptr) {
+        return std::make_shared<IntReply>(0);
+    }
+
+    int64_t remed = 0;
+    for(int i = 1; i < args.size(); ++i) {
+        remed += set->rem(args[i]);
+    }
+
+    if(remed > 0) {
+        m_persister->persistCmd(cmd->getCmd());
+    }
+
+    return std::make_shared<IntReply>(remed);
 }
 
 // hash
 Reply::ptr KVStore::hSet(Command::ptr cmd) {
+    auto args = cmd->getArgs();
+    if(((args.size()) & 1) != 1) {
+        return newSyntaxErrReply();
+    }
 
+    auto key = args[0];
+    auto hmap = getAsHashMap(key);
+
+    if(hmap.get() == nullptr) {
+        hmap = std::make_shared<hashMapEntity>(key);
+        putAsHashMap(key, hmap);
+    }
+
+    for(int i = 0; i < args.size() - 1; i += 2) {
+        auto hkey = args[i + 1];
+        auto hvalue = args[i + 2];
+        hmap->put(hkey, hvalue);
+    }
+
+    m_persister->persistCmd(cmd->getCmd());
+    return std::make_shared<IntReply>((int64_t)((args.size() - 1) >> 1));
 }
 
 Reply::ptr KVStore::hGet(Command::ptr cmd) {
+    auto args = cmd->getArgs();
+    auto key = args[0];
+    auto hmap = getAsHashMap(key);    
 
+    if(hmap.get() == nullptr) {
+        return newNillReply();
+    }
+
+    auto v = hmap->get(args[1]);
+    if(v.size() != 0) {
+        return std::make_shared<BulkReply>(v);
+    }
+
+    return newNillReply();
 }
 
 Reply::ptr KVStore::hDel(Command::ptr cmd) {
+    auto args = cmd->getArgs();
+    auto key = args[0];
+    auto hmap = getAsHashMap(key); 
 
+    if(hmap.get() == nullptr) {
+        return std::make_shared<IntReply>(0);
+    }
+
+    int64_t remed = 0;
+    for(int i = 1; i < args.size(); ++i) {
+        remed += hmap->del(args[i]);
+    }
+
+    if(remed > 0) {
+        m_persister->persistCmd(cmd->getCmd());
+    }
+    return std::make_shared<IntReply>(remed);
 }
     
 // sorted set
 Reply::ptr KVStore::zAdd(Command::ptr cmd) {
+    auto args = cmd->getArgs();
+    if(((args.size()) & 1) != 1) {
+        return newSyntaxErrReply();
+    }
 
+    auto key = args[0];
+    std::vector<int64_t> scores;
+    scores.reserve((args.size() - 1) >> 1);
+    std::vector<std::string> members;
+    members.reserve((args.size() - 1) >> 1);
+
+    for(int i = 0; i < args.size() - 1; i += 2) {
+        int64_t score = 0;
+        try {
+            score = std::stoll(args[i + 1]);
+        }
+        catch (const std::exception& e) {
+            return newSyntaxErrReply();
+        }
+
+        scores.push_back(score);
+        members.push_back(args[i + 2]);
+    }
+
+    auto zset = getAsSortedSet(key);
+
+    if(zset.get() == nullptr) {
+        zset = std::make_shared<skiplist>(key);
+        putAsSortedSet(key, zset);
+    }
+
+    for(int i = 0; i < scores.size(); ++i) {
+        zset->add(scores[i], members[i]);
+    }
+
+    m_persister->persistCmd(cmd->getCmd());
+    return std::make_shared<IntReply>((int64_t)(scores.size()));
 }
 
 Reply::ptr KVStore::zRangeByScore(Command::ptr cmd) {
+    auto args = cmd->getArgs();
+    if(args.size() < 3) {
+        return newSyntaxErrReply();
+    }
 
+    auto key = args[0];
+    int64_t score1 = 0;
+    int64_t score2 = 0;
+    try {
+        score1 = std::stoll(args[1]);
+        score2 = std::stoll(args[2]);
+    }
+    catch (const std::exception& e) {
+        return newSyntaxErrReply();
+    }
+    
+    auto zset = getAsSortedSet(key);
+
+    if(zset.get() == nullptr) {
+        return newNillReply();
+    } 
+
+    auto rawRes = zset->range(score1, score2);
+    if(rawRes.size() == 0) {
+        return newNillReply();
+    }
+
+    std::vector<std::string> res;
+    res.reserve(rawRes.size());
+    for(auto& item : rawRes) {
+        res.push_back(item);
+    }
+
+    return std::make_shared<MultiBulkReply>(res);
 }
 
 Reply::ptr KVStore::zRem(Command::ptr cmd) {
+    auto args = cmd->getArgs();
+    auto key = args[0];
+    auto zset = getAsSortedSet(key);
 
+    if(zset.get() == nullptr) {
+        return std::make_shared<IntReply>(0);
+    }
+
+    int64_t remed = 0;
+    for(auto& arg : args) {
+        remed += zset->rem(arg);
+    }
+
+    if(remed > 0) {
+        m_persister->persistCmd(cmd->getCmd());
+    }
+    return std::make_shared<IntReply>(remed);
 }
 
 }

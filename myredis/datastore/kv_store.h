@@ -92,6 +92,9 @@ public:
     String::ptr getAsString(std::string key);
     int64_t put(std::string key, std::string value, bool insertStrategy);
 
+    SortedSet::ptr getAsSortedSet(std::string key);
+    void putAsSortedSet(std::string key, SortedSet::ptr zset);
+
     // 向 m_data 写入数据的成员函数模板
     template<typename T>
     void set_data(const std::string& key, T&& value) {

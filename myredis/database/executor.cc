@@ -101,7 +101,7 @@ void DBExecutor::run() {
             return;
         }
         if(result_cmd->from_me) {
-            std::string cmd = (*(result_cmd->result))->getCmd();
+            std::string cmd = (*(result_cmd->result))->getCmd()[0];
             auto it = m_cmdHandlers_2.find(cmd);
             if(it == m_cmdHandlers_2.end()) {
                 (*(result_cmd->result))->getReceiver()->send(std::make_shared<ErrReply>("unknown command " + cmd));
